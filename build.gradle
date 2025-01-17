@@ -34,7 +34,17 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation platform('org.junit:junit-bom:5.10.0')
+
+    // @RunWith 사용을 위한 의존성 추가
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.10.0'
+
+    //mockito-inline 의존성을 추가
+    testImplementation 'org.mockito:mockito-core:4.8.0'
+
+    // WebFlux 의존성 추가
+    testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
+
 }
 
 // 빌드시 src/main/java 하위에 있는 xml 파일을 build/resources/main 에 포함하기 위함
@@ -47,3 +57,7 @@ processResources {
 test {
     useJUnitPlatform()
 }
+
+// gradlew가 있는 경로에서 ./gradlew --version 로 버전 확인
+// ./gradlew build --warning-mode=all 로 Gradle에서 사용 중인 Deprecated 기능을 식별하려면 --warning-mode 옵션을 사용하여 경고를 확인
+
