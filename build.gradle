@@ -38,8 +38,13 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    // 테스트를 위한 dependecies
+    // spring boot 전용 spring data jpa 추상화 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+    // 인메모리 관계형 데이터베이스, 빌드 재시작시 초기화됨
+    implementation 'com.h2database:h2'
+
+    // 테스트를 위한 dependecies
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation platform('org.junit:junit-bom:5.10.0')
 
