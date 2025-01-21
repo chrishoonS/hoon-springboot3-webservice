@@ -1,5 +1,6 @@
 package com.chrishoon.book.springboot.domain.posts;
 
+import com.chrishoon.book.springboot.domain.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // 기본 생성자 자동추가
 // 코틀린에서는 위 롬복 어노테이션 불필요
 @Entity              // 테이블과 링크될 클래스, 언더스코어 네이밍으로 테이블 이름 매칭
-public class Posts { //실제 DB 테이블과 매칭될 클래스 = Entity Class
+public class Posts extends BaseTimeEntity { //실제 DB 테이블과 매칭될 클래스 = Entity Class
     // Entity 클래스에서는 절대 Setter 메서드를 만들지 않음!!!!
     // 생성자를 통해 최종값 채운 후 DB insert
     // 값 변경이 필요한 경우 해당 이벤트에 맞는 public 메서드 호출

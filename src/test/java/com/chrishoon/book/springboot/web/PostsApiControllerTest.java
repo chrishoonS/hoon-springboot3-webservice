@@ -72,8 +72,8 @@ class PostsApiControllerTest {
 
         Long updateId = savedPosts.getId();
         // build하면서 assertThat으로 값 비교를 먼저하다보니 에러발생, expectedTitle과 expectedContent 값만 바꿔주면돼
-        String expectedTitle = "title2";
-        String expectedContent = "content2";
+        String expectedTitle = "title";
+        String expectedContent = "content";
 
         PostsUpdateRequestDto requestDto = PostsUpdateRequestDto.builder()
                 .title(expectedTitle)
