@@ -2,7 +2,6 @@ package com.chrishoon.book.springboot.domain.posts;
 
 import jakarta.persistence.*;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -34,6 +33,11 @@ public class Posts { //실제 DB 테이블과 매칭될 클래스 = Entity Class
         this.title = title;
         this.content = content;
         this.author = author;
+    }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
     }
 
 }
