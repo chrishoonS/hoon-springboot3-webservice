@@ -44,6 +44,8 @@ dependencies {
     // 인메모리 관계형 데이터베이스, 빌드 재시작시 초기화됨
     implementation 'com.h2database:h2'
 
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+
     // 테스트를 위한 dependecies
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation platform('org.junit:junit-bom:5.10.0')

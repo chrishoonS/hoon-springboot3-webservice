@@ -51,7 +51,7 @@ class PostsApiControllerTest {
                 .author("author")
                 .build();
 
-        String url = "http://localhost:" + port + "/api/vi/posts";
+        String url = "http://localhost:" + port + "/api/v1/posts";
 
         // when
         ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
@@ -71,6 +71,7 @@ class PostsApiControllerTest {
         Posts savedPosts = postsRepository.save(Posts.builder().title("title").content("content").author("author").build());
 
         Long updateId = savedPosts.getId();
+        // build하면서 assertThat으로 값 비교를 먼저하다보니 에러발생, expectedTitle과 expectedContent 값만 바꿔주면돼
         String expectedTitle = "title2";
         String expectedContent = "content2";
 
@@ -79,7 +80,7 @@ class PostsApiControllerTest {
                 .content(expectedContent)
                 .build();
 
-        String url = "http://localhost:" + port + "/api/vi/posts/" + updateId;
+        String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;
 
         HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
 
