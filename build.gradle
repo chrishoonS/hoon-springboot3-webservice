@@ -47,6 +47,10 @@ dependencies {
     // mustache 의존성
     implementation 'org.springframework.boot:spring-boot-starter-mustache'
 
+    // spring security 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
     // 테스트를 위한 dependecies
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation platform('org.junit:junit-bom:5.10.0')
