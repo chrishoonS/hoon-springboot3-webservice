@@ -56,8 +56,8 @@ public class SecurityConfig extends WebSecurityConfiguration {
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/"))  // 로그아웃 성공 시 리다이렉트 URL
                 .oauth2Login(oauth2 -> oauth2               // 소셜 로그인 및 사용자 인증을 처리, customOAuth2UserService를 설정하여 사용자 정보를 가져오고 인증 처리에 사용
-                        .userInfoEndpoint(userInfo -> userInfo
-                                .userService(customOAuth2UserService) // OAuth2 사용자 서비스 설정
+                        .userInfoEndpoint(userInfo -> userInfo          // OAuth2 로그인 성공 이후 사용자 정보를 가져올때 설정 담당
+                                .userService(customOAuth2UserService)                       // OAuth2 사용자 서비스 설정
                         )
                 );
 
