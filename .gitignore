@@ -43,3 +43,5 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+# oauth 보안 방지를 위해 추가
+src/main/resources/application-oauth.properties
