@@ -1,15 +1,21 @@
 package com.chrishoon.book.springboot.domain.user;
 
 import com.chrishoon.book.springboot.domain.BaseTimeEntity;
-import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_user") // 예약어를 피하기 위해 테이블 이름 변경
 public class User extends BaseTimeEntity {
 
     @Id
@@ -22,10 +28,10 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column
     private String picture;
 
-    @Enumerated(EnumType.STRING)    // JPA로 데이터베이스 저장시 Enum 값을 어떤 형태로 저장할지 결정, 기본적으로 int로 된 숫자 저장
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
@@ -44,7 +50,7 @@ public class User extends BaseTimeEntity {
         return this;
     }
 
-    public String getRoleKey(){
+    public String getRoleKey() {
         return this.role.getKey();
     }
 }

@@ -1,102 +1,42 @@
-plugins {
-    id 'java'
-    id 'org.springframework.boot' version '3.4.0'
-    id 'io.spring.dependency-management' version '1.1.6'
-}
-
-group = 'com.chrishoon.book'
-version = '1.0-SNAPSHOT'
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+buildscript {
+    ext {
+        springBootVersion = '2.1.9.RELEASE'
     }
-}
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
+    repositories {
+        mavenCentral()
+        jcenter()
     }
-}
-
-repositories {
-    mavenCentral()
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management' // 의존성 관리 플러그인
+apply plugin: 'io.spring.dependency-management'
 
+group 'com.chrishoon.book'
+version '1.0.4-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
+sourceCompatibility = 1.8   
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    // lombok 의존성 gradle 5.xx 이하
-//    implementation 'org.projectlombok:lombok'
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.projectlombok:lombok')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-mustache')
+    compile('com.h2database:h2')
 
-    // lombok 의존성 gradle 5.xx 이상
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+    compile('org.springframework.session:spring-session-jdbc')
 
-    // spring boot 전용 spring data jpa 추상화 라이브러리
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile("org.mariadb.jdbc:mariadb-java-client")
 
-    // 인메모리 관계형 데이터베이스, 빌드 재시작시 초기화됨
-    implementation 'com.h2database:h2'
-
-    // mustache 의존성
-    implementation 'org.springframework.boot:spring-boot-starter-mustache'
-
-    // spring security 의존성
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-
-    // 테스트를 위한 dependecies
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-
-    // @RunWith 사용을 위한 의존성
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testImplementation 'org.junit.vintage:junit-vintage-engine:5.10.0'
-
-    //mockito-inline 의존성
-    testImplementation 'org.mockito:mockito-core:4.8.0'
-
-    // WebFlux 의존성
-    testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
-
-    // If using JUnit Jupiter
-    // 아래 dependency 추가시 아래 에러 문구 해결
-    // Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-    // gradle 버전에 따른 dependency 추가 관련 정보
-    // https://docs.gradle.org/8.10/userguide/upgrading_version_8.html#test_framework_implementation_dependencies
-    // If using JUnit Vintage
-//    testCompileOnly 'junit:junit:4.13.2'
-//    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.9.2'
-//    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-    // If using JUnit 4
-//    testImplementation 'junit:junit:4.13.2'
-
-    // If using JUnit 3
-//    testCompileOnly 'junit:junit:3.8.2'
-//    testRuntimeOnly 'junit:junit:4.13.2'
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile("org.springframework.security:spring-security-test")
 }
-
-// 빌드시 src/main/java 하위에 있는 xml 파일을 build/resources/main 에 포함하기 위함
-processResources {
-    from('src/main/java') {
-        include '**/*.xml'
-    }
-}
-
-test {
-    useJUnitPlatform()
-}
-
-// gradlew가 있는 경로에서 ./gradlew --version 로 버전 확인
-// ./gradlew build --warning-mode=all 로 Gradle에서 사용 중인 Deprecated 기능을 식별하려면 --warning-mode 옵션을 사용하여 경고를 확인
-
