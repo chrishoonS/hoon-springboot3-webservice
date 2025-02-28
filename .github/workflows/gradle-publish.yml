@@ -1,3 +1,7 @@
+env:
+  S3_BUCKET_NAME: hoon-build-bucket
+  PROJECT_NAME: hoon-springboot3-webservice
+
 name: Java CI/CD with Gradle
 
 on:
@@ -35,3 +39,28 @@ jobs:
       - name: 🚀 Build with Gradle
         run: ./gradlew clean build
         shell: bash
+
+      - name: Get current time
+        uses: 1466587594/get-current-time@v2  # utcOffset: "+09:00": 해당 action의 기준이 UTC이므로 한국시간인 KST로 진행 하기 위해 offset에 +09:00로 셋팅
+        id: current-time
+        with:
+          format: YYYY-MM-DDTHH-mm-ss
+          utcOffset: "+09:00"
+
+      - name: Show Current Time
+        run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}" # 지정한 포맷대로 현재 시간 출력
+        shell: bash
+
+      - name: Make zip file
+        run: zip -r ./$PROJECT_NAME.zip .  # 프로젝트 이름으로 해당 폴더를 모두 압축(빌드된 전체 폴더)
+        shell: bash
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1  # aws에 해당 키 값으로 접속을 진행
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Upload to S3 # s3 에 프로젝트 이름에 해당하는 폴더에 zip 파일을 저장
+        run: aws s3 cp --region ap-northeast-2 ./$PROJECT_NAME.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$PROJECT_NAME.zip
