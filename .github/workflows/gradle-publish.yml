@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # 수동으로도 실행이 가능힙니다.
+  workflow_dispatch: # 수동으로도 실행이 가능
 
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v4 # 프로젝트 코드를 CheckOut합니다.
+        uses: actions/checkout@v4 # 프로젝트 코드를 CheckOut
 
       - name: ☕ Set up JDK 1.8
         uses: actions/setup-java@v3
