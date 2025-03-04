@@ -12,7 +12,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # 수동으로도 실행이 가능
+  workflow_dispatch: # 수동으로도 실행 가능
 
 
 jobs:
