@@ -3,4 +3,4 @@ os: linux
 files:
   - source: /  # source는 전달해준 파일 중 destination으로 이동시킬 대상, / 인 경우 전체 파일을 지정
     destination: /home/ec2-user/app/step2/zip/
-    overwrite: yes
+    overwrite: OVERWRITE
